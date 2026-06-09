@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Budgets - FinGlass</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed-variant": "#005047",
+                      "on-tertiary": "#00354a",
+                      "surface-container-high": "#1c2b3c",
+                      "on-background": "#d4e4fa",
+                      "secondary-container": "#03c6b2",
+                      "secondary-fixed-dim": "#3cddc7",
+                      "primary-fixed": "#dae2fd",
+                      "on-primary-container": "#798098",
+                      "on-primary-fixed": "#131b2e",
+                      "on-tertiary-container": "#008abb",
+                      "outline": "#909097",
+                      "primary-fixed-dim": "#bec6e0",
+                      "surface-container-low": "#0d1c2d",
+                      "primary-container": "#0f172a",
+                      "on-surface-variant": "#c6c6cd",
+                      "on-primary-fixed-variant": "#3f465c",
+                      "surface-container-lowest": "#010f1f",
+                      "surface-bright": "#2c3a4c",
+                      "secondary": "#44e2cd",
+                      "error-container": "#93000a",
+                      "on-surface": "#d4e4fa",
+                      "surface-container": "#122131",
+                      "outline-variant": "#45464d",
+                      "surface-dim": "#051424",
+                      "inverse-on-surface": "#233143",
+                      "inverse-surface": "#d4e4fa",
+                      "surface-container-highest": "#273647",
+                      "on-secondary-container": "#004d44",
+                      "primary": "#bec6e0",
+                      "surface-tint": "#bec6e0",
+                      "on-error-container": "#ffdad6",
+                      "on-tertiary-fixed-variant": "#004c69",
+                      "on-secondary-fixed": "#00201c",
+                      "tertiary-container": "#001a27",
+                      "on-tertiary-fixed": "#001e2c",
+                      "on-primary": "#283044",
+                      "secondary-fixed": "#62fae3",
+                      "tertiary-fixed": "#c4e7ff",
+                      "inverse-primary": "#565e74",
+                      "tertiary": "#7bd0ff",
+                      "tertiary-fixed-dim": "#7bd0ff",
+                      "on-secondary": "#003731",
+                      "error": "#ffb4ab",
+                      "surface": "#051424",
+                      "on-error": "#690005",
+                      "background": "#051424",
+                      "surface-variant": "#273647"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xl": "80px",
+                      "gutter": "24px",
+                      "xs": "4px",
+                      "base": "8px",
+                      "md": "24px",
+                      "container-max": "1280px",
+                      "sm": "12px",
+                      "lg": "48px"
+              },
+              "fontFamily": {
+                      "body-lg": [
+                              "Manrope"
+                      ],
+                      "headline-lg": [
+                              "Sora"
+                      ],
+                      "headline-lg-mobile": [
+                              "Sora"
+                      ],
+                      "body-md": [
+                              "Manrope"
+                      ],
+                      "headline-xl": [
+                              "Sora"
+                      ],
+                      "headline-md": [
+                              "Sora"
+                      ],
+                      "label-sm": [
+                              "Manrope"
+                      ]
+              },
+              "fontSize": {
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-xl": [
+                              "48px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-sm": [
+                              "13px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Manrope:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        /* Level 0 Base Background */
+        body {
+            background-color: #051424; /* surface-dim */
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(68, 226, 205, 0.1) 0%, transparent 40%), /* Secondary Teal */
+                radial-gradient(circle at 85% 85%, rgba(123, 208, 255, 0.1) 0%, transparent 40%); /* Tertiary Blue */
+            background-attachment: fixed;
+            color: #d4e4fa; /* on-surface */
+            min-height: 100vh;
+        }
+
+        /* Glassy Cards - Level 1 Surface */
+        .glass-card {
+            background-color: rgba(18, 33, 49, 0.4); /* surface-container with opacity */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Subtle noise texture for glass */
+        .glass-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .glass-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Primary Button Glow */
+        .btn-glow:hover {
+            box-shadow: 0 0 15px rgba(68, 226, 205, 0.4);
+            transform: translateY(-1px);
+        }
+
+        /* Progress Bar Animations */
+        .progress-fill {
+            transition: width 1s ease-out;
+        }
+
+        /* Ambient Glow Shadows */
+        .ambient-shadow {
+            box-shadow: 0 10px 30px -10px rgba(68, 226, 205, 0.1);
+        }
+        
+        /* Hide scrollbar for clean look but keep functionality */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface antialiased flex flex-col md:flex-row">
+<!-- TopNavBar (Mobile Only) -->
+<nav class="md:hidden fixed top-0 w-full z-50 flex justify-between items-center px-gutter h-16 max-w-container-max mx-auto bg-surface-container/60 dark:bg-surface-container-high/60 backdrop-blur-xl border-b border-white/10 shadow-sm">
+<div class="flex items-center gap-2">
+<span class="text-headline-md font-headline-md font-bold text-secondary dark:text-secondary-fixed-dim">FinGlass</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-secondary dark:text-secondary-fixed-dim hover:bg-white/5 transition-all duration-300 p-2 rounded-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden border border-white/10">
+<img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPF71-YBjQHyCNAaSGAloi38Koj28KzgVUAyS2aTQAgAE6FexYyCfQ0HS21IbWGzVHW9oeDRQBSZyy0VFbY6j28O1RD_qNEype31TVyJt9-iWuC-w0VBHFIV2fW-ORrux6Tv-zGqGmaoIAIXOUC2a9sHDsPmQnHPQqHstr6nq-h-xMEMoRENXC5MlhsLwSL9e1UMnhLGYDp2tIr9A74VNQZxKZYE-R7IO7TSL6vRLPdmQqTQn5Z2S9Rp8ScKFl5mQ9UUcfXXnoHcli"/>
+</div>
+</div>
+</nav>
+<!-- SideNavBar (Desktop Only) -->
+<nav class="hidden md:flex flex-col h-screen py-md px-base w-64 fixed left-0 top-0 bg-surface-container-low/40 dark:bg-surface-container-lowest/40 backdrop-blur-md border-r border-white/5 z-40">
+<div class="mb-lg px-4">
+<h1 class="text-headline-md font-headline-md font-black text-on-surface">FinGlass</h1>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Wealth Management</p>
+</div>
+<div class="mb-6 px-2">
+<button class="w-full flex items-center justify-center gap-2 py-3 px-4 bg-gradient-to-b from-secondary to-secondary-fixed-dim text-on-primary-fixed font-label-sm text-label-sm rounded-lg btn-glow transition-all duration-300">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                Add Transaction
+            </button>
+</div>
+<div class="flex-1 overflow-y-auto">
+<ul class="space-y-2">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-white/5 hover:text-on-surface transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span class="text-label-sm font-label-sm">Overview</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-white/5 hover:text-on-surface transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-[20px]">receipt_long</span>
+<span class="text-label-sm font-label-sm">History</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-secondary/10 text-secondary dark:text-secondary-fixed-dim border-r-4 border-secondary transition-all duration-200 translate-x-1" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+<span class="text-label-sm font-label-sm">Budgets</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-white/5 hover:text-on-surface transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-[20px]">query_stats</span>
+<span class="text-label-sm font-label-sm">Reports</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-white/5 hover:text-on-surface transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="text-label-sm font-label-sm">Settings</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="mt-auto pt-4 border-t border-white/5">
+<ul class="space-y-2">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-white/5 hover:text-on-surface transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-[20px]">help</span>
+<span class="text-label-sm font-label-sm">Help</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-white/5 hover:text-on-surface transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+<span class="text-label-sm font-label-sm">Sign Out</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 pt-20 md:pt-0 min-h-screen flex flex-col relative z-10">
+<!-- Header Section -->
+<header class="px-gutter md:px-lg py-md md:py-lg flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-white/5">
+<div>
+<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg-mobile md:font-headline-lg text-on-surface mb-xs">Budget Planning</h2>
+<p class="text-body-md font-body-md text-on-surface-variant">Track your spending and savings goals.</p>
+</div>
+<button class="flex items-center gap-2 py-2 px-6 bg-surface-container-highest border border-white/10 hover:border-secondary/50 text-on-surface font-label-sm text-label-sm rounded-lg transition-all duration-300 backdrop-blur-md">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+                Set New Budget
+            </button>
+</header>
+<!-- Bento Grid Layout for Budgets -->
+<div class="p-gutter md:p-lg flex-1 overflow-y-auto">
+<div class="max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-12 gap-gutter md:gap-md">
+<!-- Savings Goal Tracker (Hero Card) - spans full width on mobile, 8 cols on desktop -->
+<div class="col-span-1 md:col-span-8 glass-card rounded-xl p-md ambient-shadow flex flex-col justify-between">
+<div class="glass-content">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="text-headline-md font-headline-md text-secondary">Vacation Fund</h3>
+<p class="text-label-sm font-label-sm text-on-surface-variant mt-1">Target: $5,000 by Dec 2024</p>
+</div>
+<div class="p-2 bg-secondary/10 rounded-lg border border-secondary/20">
+<span class="material-symbols-outlined text-secondary text-[24px]">flight_takeoff</span>
+</div>
+</div>
+<div class="flex items-end gap-2 mb-4">
+<span class="text-headline-xl font-headline-xl text-on-surface">$3,250</span>
+<span class="text-body-md font-body-md text-on-surface-variant pb-2">/ $5,000</span>
+</div>
+<!-- Progress Bar -->
+<div class="relative w-full h-3 bg-surface-container-highest rounded-full overflow-hidden border border-white/5">
+<div class="absolute top-0 left-0 h-full bg-gradient-to-r from-secondary-fixed-dim to-secondary rounded-full progress-fill" style="width: 65%;">
+<!-- Glow effect on progress bar -->
+<div class="absolute inset-0 bg-white/20 blur-[2px]"></div>
+</div>
+</div>
+<div class="flex justify-between items-center mt-3">
+<span class="text-label-sm font-label-sm text-secondary">65% Achieved</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">+ $450 this month</span>
+</div>
+</div>
+</div>
+<!-- Monthly Overview Mini Card - spans 4 cols -->
+<div class="col-span-1 md:col-span-4 glass-card rounded-xl p-md flex flex-col justify-center">
+<div class="glass-content text-center">
+<h4 class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider mb-2">Total Budget Spent</h4>
+<div class="relative inline-flex items-center justify-center w-32 h-32 mb-2">
+<!-- Circular Progress SVG placeholder (using standard SVG for layout, not animation) -->
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-container-highest" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3"></path>
+<path class="text-error" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="80, 100" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+<div class="absolute flex flex-col items-center">
+<span class="text-headline-md font-headline-md text-error">80%</span>
+</div>
+</div>
+<p class="text-body-md font-body-md text-error-container font-semibold">Approaching Limit</p>
+</div>
+</div>
+<!-- Budget Categories Section Header -->
+<div class="col-span-1 md:col-span-12 mt-4 mb-2 flex justify-between items-end">
+<h3 class="text-headline-md font-headline-md text-on-surface">Categories</h3>
+<button class="text-label-sm font-label-sm text-secondary hover:text-secondary-fixed-dim transition-colors">View All</button>
+</div>
+<!-- Groceries Card (Over Budget Alert) -->
+<div class="col-span-1 md:col-span-4 glass-card rounded-xl p-6 border-error/30 bg-error-container/10">
+<div class="glass-content">
+<div class="flex justify-between items-center mb-4">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-error-container/20 rounded-full border border-error/20">
+<span class="material-symbols-outlined text-error text-[20px]">shopping_cart</span>
+</div>
+<span class="text-body-lg font-body-lg font-semibold text-on-surface">Groceries</span>
+</div>
+<span class="material-symbols-outlined text-error" title="Over Budget">warning</span>
+</div>
+<div class="mb-2 flex justify-between items-baseline">
+<span class="text-headline-md font-headline-md text-error">$650</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">/ $500</span>
+</div>
+<div class="relative w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="absolute top-0 left-0 h-full bg-error rounded-full progress-fill" style="width: 100%;"></div>
+</div>
+<p class="text-label-sm font-label-sm text-error mt-2">130% of limit - $150 over</p>
+</div>
+</div>
+<!-- Housing Card (On Track) -->
+<div class="col-span-1 md:col-span-4 glass-card rounded-xl p-6">
+<div class="glass-content">
+<div class="flex justify-between items-center mb-4">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-surface-container-highest rounded-full border border-white/10">
+<span class="material-symbols-outlined text-primary text-[20px]">home</span>
+</div>
+<span class="text-body-lg font-body-lg font-semibold text-on-surface">Housing</span>
+</div>
+</div>
+<div class="mb-2 flex justify-between items-baseline">
+<span class="text-headline-md font-headline-md text-on-surface">$1,500</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">/ $1,500</span>
+</div>
+<div class="relative w-full h-2 bg-surface-container-highest rounded-full overflow-hidden border border-white/5">
+<div class="absolute top-0 left-0 h-full bg-primary rounded-full progress-fill" style="width: 100%;"></div>
+</div>
+<p class="text-label-sm font-label-sm text-on-surface-variant mt-2">100% of limit - Fixed</p>
+</div>
+</div>
+<!-- Entertainment Card (Under Budget) -->
+<div class="col-span-1 md:col-span-4 glass-card rounded-xl p-6">
+<div class="glass-content">
+<div class="flex justify-between items-center mb-4">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-secondary/10 rounded-full border border-secondary/20">
+<span class="material-symbols-outlined text-secondary text-[20px]">movie</span>
+</div>
+<span class="text-body-lg font-body-lg font-semibold text-on-surface">Entertainment</span>
+</div>
+</div>
+<div class="mb-2 flex justify-between items-baseline">
+<span class="text-headline-md font-headline-md text-on-surface">$120</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">/ $300</span>
+</div>
+<div class="relative w-full h-2 bg-surface-container-highest rounded-full overflow-hidden border border-white/5">
+<div class="absolute top-0 left-0 h-full bg-secondary rounded-full progress-fill" style="width: 40%;"></div>
+</div>
+<p class="text-label-sm font-label-sm text-secondary mt-2">40% of limit - $180 remaining</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="w-full py-md px-gutter flex flex-col md:flex-row justify-between items-center max-w-container-max mx-auto bg-surface-dim/80 dark:bg-surface-dim/80 backdrop-blur-sm border-t border-white/5 mt-auto z-20 relative">
+<div class="text-label-sm font-bold text-on-surface mb-4 md:mb-0">
+                © 2024 FinGlass Analytics. All rights reserved.
+            </div>
+<div class="flex gap-6">
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Security</a>
+</div>
+</footer>
+</main>
+<!-- BottomNavBar (Mobile Only) - Using structure requested, but visually it's often confusing to have both top and bottom nav on mobile if not needed. Adding per JSON constraints. -->
+<!-- Assuming this is a top level destination, but side nav already handles desktop. -->
+</body></html>
