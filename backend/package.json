@@ -1,0 +1,30 @@
+{
+  "name": "finglass-backend",
+  "version": "1.0.0",
+  "description": "FinGlass Personal Finance Manager - Backend API",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "build": "echo \"No build required for Node.js\""
+  },
+  "keywords": [
+    "finance",
+    "budget",
+    "expense-tracker",
+    "income-tracker",
+    "personal-finance"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "@supabase/supabase-js": "^2.33.0",
+    "exceljs": "^4.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
