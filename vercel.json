@@ -5,10 +5,6 @@
     {
       "src": "/api/:path*",
       "dest": "/api/index.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/frontend/$1"
     }
   ]
 }
