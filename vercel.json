@@ -1,0 +1,11 @@
+{
+  "buildCommand": "npm install",
+  "outputDirectory": "frontend",
+  "public": true,
+  "redirects": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://your-backend-domain.vercel.app/api/:path*"
+    }
+  ]
+}
