@@ -2,11 +2,6 @@
   "version": 2,
   "buildCommand": "cd backend && npm install",
   "public": true,
-  "functions": {
-    "backend/server.js": {
-      "runtime": "nodejs18.x"
-    }
-  },
   "routes": [
     {
       "src": "/api/(.*)",
