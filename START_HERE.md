@@ -89,21 +89,21 @@ Semua file sudah dibuat di folder `backend/`:
 
 ## 🎨 File Frontend Lengkap
 
-Semua file sudah dibuat di folder `FE-Stitch/`:
+Semua file sudah dibuat di folder `frontend/`:
 
 ### HTML Pages (sudah ada):
 ```
-✅ FE-Stitch/dashboard.html             (Update dengan JS nanti)
-✅ FE-Stitch/transactions.html          (Update dengan JS nanti)
-✅ FE-Stitch/budget.html                (Update dengan JS nanti)
-✅ FE-Stitch/analytics.html             (Update dengan JS nanti)
+✅ frontend/dashboard.html             (Update dengan JS nanti)
+✅ frontend/transactions.html          (Update dengan JS nanti)
+✅ frontend/budget.html                (Update dengan JS nanti)
+✅ frontend/analytics.html             (Update dengan JS nanti)
 ```
 
 ### New Files (Baru):
 ```
-✅ FE-Stitch/login.html                 (Login page - siap pakai)
-✅ FE-Stitch/js/api.js                  (API client helper - siap pakai)
-✅ FE-Stitch/css/styles.css             (Custom styles - siap pakai)
+✅ frontend/login.html                 (Login page - siap pakai)
+✅ frontend/js/api.js                  (API client helper - siap pakai)
+✅ frontend/css/styles.css             (Custom styles - siap pakai)
 ```
 
 ---

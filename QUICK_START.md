@@ -66,8 +66,8 @@ npm run dev
 ## 5️⃣ Setup Frontend Integration
 
 Buat file baru:
-- `FE-Stitch/js/api.js` - API client
-- `FE-Stitch/css/styles.css` - Styling
+- `frontend/js/api.js` - API client
+- `frontend/css/styles.css` - Styling
 
 Update HTML untuk tambah login form.
 

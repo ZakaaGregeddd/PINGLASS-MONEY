@@ -11,19 +11,19 @@
     },
     {
       "src": "/js/(.*)",
-      "dest": "/FE-Stitch/js/$1"
+      "dest": "/frontend/js/$1"
     },
     {
       "src": "/css/(.*)",
-      "dest": "/FE-Stitch/css/$1"
+      "dest": "/frontend/css/$1"
     },
     {
       "src": "/(.*\\.html)",
-      "dest": "/FE-Stitch/$1"
+      "dest": "/frontend/$1"
     },
     {
       "src": "/",
-      "dest": "/FE-Stitch/dashboard.html"
+      "dest": "/frontend/dashboard.html"
     }
   ]
 }

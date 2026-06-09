@@ -80,7 +80,7 @@
 
 ```
 finglass-finance/
-├── FE-Stitch/                    # Frontend
+├── frontend/                 # Frontend
 │   ├── dashboard.html            # Dashboard page
 │   ├── transactions.html         # Transaction manager
 │   ├── budget.html              # Budget tracker
@@ -145,7 +145,7 @@ npm run dev  # Server running on http://localhost:3001
 
 ### 3. Setup Frontend
 ```bash
-# Open FE-Stitch/dashboard.html in browser
+# Open frontend/dashboard.html in browser
 # Atau setup live server di VS Code
 ```
 
