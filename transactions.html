@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Transaction History - FinGlass</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&amp;family=Sora:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Theme Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed-variant": "#005047",
+                    "on-tertiary": "#00354a",
+                    "surface-container-high": "#1c2b3c",
+                    "on-background": "#d4e4fa",
+                    "secondary-container": "#03c6b2",
+                    "secondary-fixed-dim": "#3cddc7",
+                    "primary-fixed": "#dae2fd",
+                    "on-primary-container": "#798098",
+                    "on-primary-fixed": "#131b2e",
+                    "on-tertiary-container": "#008abb",
+                    "outline": "#909097",
+                    "primary-fixed-dim": "#bec6e0",
+                    "surface-container-low": "#0d1c2d",
+                    "primary-container": "#0f172a",
+                    "on-surface-variant": "#c6c6cd",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "surface-container-lowest": "#010f1f",
+                    "surface-bright": "#2c3a4c",
+                    "secondary": "#44e2cd",
+                    "error-container": "#93000a",
+                    "on-surface": "#d4e4fa",
+                    "surface-container": "#122131",
+                    "outline-variant": "#45464d",
+                    "surface-dim": "#051424",
+                    "inverse-on-surface": "#233143",
+                    "inverse-surface": "#d4e4fa",
+                    "surface-container-highest": "#273647",
+                    "on-secondary-container": "#004d44",
+                    "primary": "#bec6e0",
+                    "surface-tint": "#bec6e0",
+                    "on-error-container": "#ffdad6",
+                    "on-tertiary-fixed-variant": "#004c69",
+                    "on-secondary-fixed": "#00201c",
+                    "tertiary-container": "#001a27",
+                    "on-tertiary-fixed": "#001e2c",
+                    "on-primary": "#283044",
+                    "secondary-fixed": "#62fae3",
+                    "tertiary-fixed": "#c4e7ff",
+                    "inverse-primary": "#565e74",
+                    "tertiary": "#7bd0ff",
+                    "tertiary-fixed-dim": "#7bd0ff",
+                    "on-secondary": "#003731",
+                    "error": "#ffb4ab",
+                    "surface": "#051424",
+                    "on-error": "#690005",
+                    "background": "#051424",
+                    "surface-variant": "#273647"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "80px",
+                    "gutter": "24px",
+                    "xs": "4px",
+                    "base": "8px",
+                    "md": "24px",
+                    "container-max": "1280px",
+                    "sm": "12px",
+                    "lg": "48px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Manrope"],
+                    "headline-lg": ["Sora"],
+                    "headline-lg-mobile": ["Sora"],
+                    "body-md": ["Manrope"],
+                    "headline-xl": ["Sora"],
+                    "headline-md": ["Sora"],
+                    "label-sm": ["Manrope"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "label-sm": ["13px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Subtle noise texture for glass elements */
+        .glass-noise {
+            position: relative;
+        }
+        .glass-noise::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            opacity: 0.02;
+            z-index: -1;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen overflow-x-hidden font-body-md text-body-md selection:bg-secondary selection:text-on-secondary-fixed">
+<!-- Global Background Elements (Level 0) -->
+<div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+<div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-secondary/10 rounded-full blur-[150px] mix-blend-screen opacity-60"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] bg-tertiary/10 rounded-full blur-[150px] mix-blend-screen opacity-60"></div>
+</div>
+<!-- TopNavBar (Shared Component) -->
+<nav class="bg-surface-container/60 dark:bg-surface-container-high/60 backdrop-blur-xl border-b border-white/10 shadow-sm fixed top-0 w-full z-50 flex justify-between items-center px-gutter h-16 max-w-container-max mx-auto md:px-lg">
+<!-- Logo / Left -->
+<div class="flex items-center gap-md">
+<!-- Mobile Menu Trigger -->
+<button class="md:hidden text-on-surface-variant hover:text-on-surface p-1">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<a class="text-headline-md font-headline-md font-bold text-secondary dark:text-secondary-fixed-dim tracking-tight" href="#">
+                FinGlass
+            </a>
+<!-- Desktop Nav Links -->
+<div class="hidden md:flex items-center ml-lg gap-sm h-full">
+<a class="h-16 flex items-center px-3 text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-all duration-300 font-label-sm text-label-sm uppercase tracking-wider relative group" href="#">
+<span>Dashboard</span>
+<div class="absolute bottom-0 left-0 w-full h-[2px] bg-secondary scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
+</a>
+<a class="h-16 flex items-center px-3 text-secondary dark:text-secondary-fixed-dim border-b-2 border-secondary font-label-sm text-label-sm uppercase tracking-wider bg-white/5" href="#">
+<span>Transactions</span>
+</a>
+<a class="h-16 flex items-center px-3 text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-all duration-300 font-label-sm text-label-sm uppercase tracking-wider relative group" href="#">
+<span>Budgets</span>
+<div class="absolute bottom-0 left-0 w-full h-[2px] bg-secondary scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
+</a>
+<a class="h-16 flex items-center px-3 text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-all duration-300 font-label-sm text-label-sm uppercase tracking-wider relative group" href="#">
+<span>Analytics</span>
+<div class="absolute bottom-0 left-0 w-full h-[2px] bg-secondary scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
+</a>
+</div>
+</div>
+<!-- Trailing Actions / Right -->
+<div class="flex items-center gap-sm">
+<div class="hidden md:flex items-center bg-surface-container border border-white/5 rounded-full px-3 py-1.5 focus-within:border-secondary focus-within:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px] mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant/50 w-32 focus:w-48 transition-all p-0" placeholder="Search..." type="text"/>
+</div>
+<button class="p-2 text-on-surface-variant hover:text-on-surface hover:bg-white/5 rounded-full transition-all relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-secondary rounded-full"></span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-on-surface hover:bg-white/5 rounded-full transition-all">
+<span class="material-symbols-outlined">sync</span>
+</button>
+<button class="w-8 h-8 rounded-full overflow-hidden border border-white/10 hover:border-secondary transition-colors ml-2">
+<img alt="User profile portrait of a young professional in soft studio lighting." class="w-full h-full object-cover" data-alt="A polished headshot of a young professional woman looking forward. Soft, sophisticated studio lighting highlights subtle features against a dark, moody background. Professional attire, modern financial context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-25CgmxcJzxXblxUl00JfvSGXw2EumgVuDv7TXkH7QnUGUkJNZnriOFr1giUp1_DJ6Azem-13KW-ZMYcFf-7kAsLVhuL8MIGjAWv6F83n05p4dEN6X3n00Z1dHQr58Cm6FZudebqYK8yKNnhb0xNei3AKgLJz-lIrtry1rv2qJL37dsdJ0xmndz-c52ao5rU92GDBoZd8ErfXKVtKlOxdeK1f-Re5VPVsVipqt7fQ0I9puZdb0ar3sklfGKkVpeT1A43-qXfXXhOl"/>
+</button>
+</div>
+</nav>
+<!-- SideNavBar (Shared Component - Desktop Only) -->
+<aside class="hidden lg:flex flex-col h-screen py-md px-base w-64 fixed left-0 top-0 bg-surface-container-low/40 dark:bg-surface-container-lowest/40 backdrop-blur-md border-r border-white/5 pt-[88px] z-40">
+<div class="flex flex-col flex-grow gap-2 mt-sm">
+<p class="px-3 text-label-sm font-label-sm text-on-surface-variant/60 uppercase tracking-widest mb-2">Main Menu</p>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-white/5 hover:text-on-surface transition-all group" href="#">
+<span class="material-symbols-outlined text-[22px] group-hover:scale-110 transition-transform">dashboard</span>
+<span class="font-label-sm text-label-sm">Overview</span>
+</a>
+<!-- Active Tab -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-secondary/10 text-secondary dark:text-secondary-fixed-dim border-l-4 border-secondary translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined text-[22px]">receipt_long</span>
+<span class="font-label-sm text-label-sm">History</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-white/5 hover:text-on-surface transition-all group" href="#">
+<span class="material-symbols-outlined text-[22px] group-hover:scale-110 transition-transform">account_balance_wallet</span>
+<span class="font-label-sm text-label-sm">Budgets</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-white/5 hover:text-on-surface transition-all group" href="#">
+<span class="material-symbols-outlined text-[22px] group-hover:scale-110 transition-transform">query_stats</span>
+<span class="font-label-sm text-label-sm">Reports</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-white/5 hover:text-on-surface transition-all group mt-auto" href="#">
+<span class="material-symbols-outlined text-[22px] group-hover:rotate-90 transition-transform duration-500">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</a>
+</div>
+<!-- CTA -->
+<div class="mt-md px-2">
+<button class="w-full py-3 rounded-xl bg-gradient-to-b from-surface-bright to-surface-container border border-white/10 flex items-center justify-center gap-2 hover:border-secondary/50 hover:shadow-[0_0_15px_rgba(68,226,205,0.1)] transition-all group">
+<span class="material-symbols-outlined text-secondary group-hover:scale-110 transition-transform">add</span>
+<span class="font-label-sm text-label-sm text-on-surface">Add Transaction</span>
+</button>
+</div>
+<div class="mt-md pt-md border-t border-white/5 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">help</span>
+<span class="font-label-sm text-label-sm">Help</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:text-error hover:bg-error/10 transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+<span class="font-label-sm text-label-sm">Sign Out</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<main class="relative z-10 pt-[88px] lg:pl-[256px] min-h-screen pb-xl">
+<div class="max-w-container-max mx-auto px-gutter md:px-lg flex flex-col gap-lg w-full">
+<!-- Page Header -->
+<header class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-md">
+<div>
+<h1 class="font-headline-xl text-headline-lg-mobile md:text-headline-xl text-on-surface tracking-tight">Transaction History</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 max-w-2xl">Review, filter, and manage your financial activity with precision.</p>
+</div>
+<div class="flex items-center gap-sm">
+<button class="bg-surface-container hover:bg-surface-bright border border-white/10 text-on-surface px-4 py-2.5 rounded-lg font-label-sm text-label-sm flex items-center gap-2 transition-all hover:border-white/20">
+<span class="material-symbols-outlined text-[18px]">print</span>
+                        Print
+                    </button>
+<!-- Primary Button -->
+<button class="bg-gradient-to-b from-[#3cddc7] to-[#03c6b2] text-on-secondary-fixed shadow-[0_0_15px_rgba(68,226,205,0.2)] hover:shadow-[0_0_20px_rgba(68,226,205,0.4)] px-5 py-2.5 rounded-lg font-label-sm text-label-sm flex items-center gap-2 transition-all hover:scale-[1.02]">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                        Export (CSV/PDF)
+                    </button>
+</div>
+</header>
+<!-- Tools & Filters Bar (Level 1 Glass) -->
+<section class="bg-surface-container-high/40 backdrop-blur-[20px] border border-white/5 rounded-2xl p-sm md:p-md shadow-lg glass-noise flex flex-col lg:flex-row gap-sm lg:gap-md items-center justify-between">
+<!-- Search -->
+<div class="w-full lg:w-1/3 relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input id="search-input" class="w-full bg-surface-container/50 border border-white/10 rounded-xl pl-10 pr-4 py-3 font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:bg-surface-container-high focus:border-secondary/50 focus:ring-0 transition-all outline-none" placeholder="Search merchants, amounts, notes..." type="text"/>
+</div>
+<!-- Filters -->
+<div class="w-full lg:w-auto flex flex-wrap gap-sm">
+<!-- Category Filter -->
+<div class="relative">
+<select id="category-filter" class="bg-surface-container/50 border border-white/10 hover:border-white/20 hover:bg-surface-bright rounded-xl px-4 py-3 font-label-sm text-label-sm text-on-surface flex items-center gap-2 transition-all focus:ring-0 outline-none cursor-pointer">
+<option value="All">All Categories</option>
+<option value="Groceries">Groceries</option>
+<option value="Housing">Housing</option>
+<option value="Entertainment">Entertainment</option>
+<option value="Transport">Transport</option>
+<option value="Software">Software</option>
+<option value="Food & Drink">Food & Drink</option>
+<option value="Bills">Bills</option>
+<option value="Income">Income</option>
+</select>
+</div>
+<!-- Sort Filter -->
+<div class="relative">
+<select id="sort-filter" class="bg-surface-container/50 border border-white/10 hover:border-white/20 hover:bg-surface-bright rounded-xl px-4 py-3 font-label-sm text-label-sm text-on-surface flex items-center gap-2 transition-all focus:ring-0 outline-none cursor-pointer">
+<option value="newest">Newest First</option>
+<option value="oldest">Oldest First</option>
+<option value="highest">Highest Amount</option>
+<option value="lowest">Lowest Amount</option>
+</select>
+</div>
+</div>
+</section>
+<!-- Main Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-md items-start">
+<!-- Table Section (Cols 1-8) -->
+<div class="lg:col-span-8 xl:col-span-9 flex flex-col gap-sm">
+<div class="bg-surface-container-high/40 backdrop-blur-[20px] border border-white/5 rounded-2xl overflow-hidden shadow-lg glass-noise">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse whitespace-nowrap min-w-[700px]">
+<thead>
+<tr class="bg-surface-container/50 border-b border-white/10 text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+<th class="py-4 px-md font-semibold">Date</th>
+<th class="py-4 px-md font-semibold">Merchant / Details</th>
+<th class="py-4 px-md font-semibold">Category</th>
+<th class="py-4 px-md font-semibold text-right">Amount</th>
+<th class="py-4 px-md font-semibold text-center">Status</th>
+<th class="py-4 px-4 font-semibold"></th>
+</tr>
+</thead>
+<tbody id="transactions-tbody" class="divide-y divide-white/5 text-body-md font-body-md">
+<!-- Dynamically populated -->
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="p-4 border-t border-white/5 bg-surface-container/20 flex items-center justify-between">
+<span id="pagination-info" class="font-label-sm text-label-sm text-on-surface-variant">Showing 1 to 5 of 24 entries</span>
+<div id="pagination-controls" class="flex gap-1">
+<!-- Dynamic controls -->
+</div>
+</div>
+</div>
+</div>
+<!-- Sidebar Widget (Cols 9-12) -->
+<div class="lg:col-span-4 xl:col-span-3 flex flex-col gap-md">
+<!-- Monthly Summary Card -->
+<div class="bg-surface-container-high/40 backdrop-blur-[20px] border border-white/5 rounded-2xl p-md shadow-lg glass-noise relative overflow-hidden group">
+<!-- Ambient glow -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-secondary/10 rounded-full blur-[40px] pointer-events-none group-hover:bg-secondary/20 transition-colors duration-700"></div>
+<h3 class="font-headline-md text-[20px] text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">monitoring</span>
+                            Summary Stats
+                        </h3>
+<div class="space-y-6">
+<!-- Metric 1 -->
+<div>
+<div class="flex justify-between items-end mb-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Total Inflow</span>
+<span class="font-label-sm text-label-sm text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +12%
+                                    </span>
+</div>
+<div id="summary-inflow" class="font-headline-lg text-[28px] text-on-surface font-bold tracking-tight">$8,450.00</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full mt-3 overflow-hidden">
+<div id="summary-inflow-progress" class="bg-secondary h-full rounded-full w-[85%]"></div>
+</div>
+</div>
+<hr class="border-white/5"/>
+<!-- Metric 2 -->
+<div>
+<div class="flex justify-between items-end mb-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Total Outflow</span>
+<span class="font-label-sm text-label-sm text-error/80 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_down</span> -4%
+                                    </span>
+</div>
+<div id="summary-outflow" class="font-headline-lg text-[28px] text-on-surface font-bold tracking-tight">$3,124.50</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full mt-3 overflow-hidden">
+<div id="summary-outflow-progress" class="bg-tertiary h-full rounded-full w-[45%]"></div>
+</div>
+</div>
+</div>
+<!-- Mini Chart Area -->
+<div class="mt-8 pt-6 border-t border-white/5">
+<span class="font-label-sm text-label-sm text-on-surface-variant block mb-4">Top Spending Categories</span>
+<div id="summary-categories" class="space-y-3">
+<!-- Dynamically populated -->
+</div>
+</div>
+</div>
+<!-- Promo/Insight Card (Level 1 Glass) -->
+<div class="bg-gradient-to-br from-surface-container-high/60 to-surface-container-lowest/60 backdrop-blur-[12px] border border-secondary/20 rounded-2xl p-md shadow-[0_0_20px_rgba(3,198,178,0.05)] relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-20">
+<span class="material-symbols-outlined text-[64px] text-secondary">tips_and_updates</span>
+</div>
+<h4 class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-2">Smart Insight</h4>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+                            Your dining expenses are <strong class="text-secondary-fixed-dim">15% lower</strong> this month. You're on track to save an extra $120. Keep it up!
+                        </p>
+</div>
+</div>
+</div>
+<!-- Footer (Shared Component) -->
+<footer class="w-full py-md px-gutter flex flex-col md:flex-row justify-between items-center bg-surface-dim/80 dark:bg-surface-dim/80 backdrop-blur-sm border-t border-white/5 rounded-2xl mt-xl">
+<div class="text-label-sm font-bold text-on-surface mb-4 md:mb-0">
+                    © 2024 FinGlass Analytics. All rights reserved.
+                </div>
+<div class="flex gap-md">
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Security</a>
+</div>
+</footer>
+</div>
+</main>
+
+<script src="db.js"></script>
+<script src="app.js"></script>
+<script>
+let currentPage = 1;
+const entriesPerPage = 5;
+
+function renderPage() {
+    const searchVal = document.getElementById('search-input').value.toLowerCase();
+    const categoryVal = document.getElementById('category-filter').value;
+    const sortVal = document.getElementById('sort-filter').value;
+
+    let txs = window.FinGlassDB.getTransactions();
+
+    // Search filter
+    if (searchVal) {
+        txs = txs.filter(tx => 
+            tx.merchant.toLowerCase().includes(searchVal) ||
+            tx.category.toLowerCase().includes(searchVal) ||
+            (tx.details && tx.details.toLowerCase().includes(searchVal)) ||
+            tx.amount.toString().includes(searchVal)
+        );
+    }
+
+    // Category filter
+    if (categoryVal !== 'All') {
+        txs = txs.filter(tx => tx.category === categoryVal);
+    }
+
+    // Sorting
+    if (sortVal === 'oldest') {
+        txs.sort((a, b) => new Date(a.date) - new Date(b.date));
+    } else if (sortVal === 'newest') {
+        txs.sort((a, b) => new Date(b.date) - new Date(a.date));
+    } else if (sortVal === 'highest') {
+        txs.sort((a, b) => b.amount - a.amount);
+    } else if (sortVal === 'lowest') {
+        txs.sort((a, b) => a.amount - b.amount);
+    }
+
+    // Pagination bounds
+    const totalEntries = txs.length;
+    const totalPages = Math.ceil(totalEntries / entriesPerPage) || 1;
+    if (currentPage > totalPages) currentPage = totalPages;
+
+    const startIdx = (currentPage - 1) * entriesPerPage;
+    const endIdx = Math.min(startIdx + entriesPerPage, totalEntries);
+    const paginatedTxs = txs.slice(startIdx, endIdx);
+
+    // Render Table
+    const tbody = document.getElementById('transactions-tbody');
+    tbody.innerHTML = '';
+
+    if (paginatedTxs.length === 0) {
+        tbody.innerHTML = `
+        <tr>
+            <td colspan="6" class="py-8 text-center text-on-surface-variant">
+                No matching transactions found.
+            </td>
+        </tr>
+        `;
+    } else {
+        paginatedTxs.forEach(tx => {
+            const isExpense = tx.amount < 0;
+            const amountFormatted = (isExpense ? '-' : '+') + new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(Math.abs(tx.amount));
+            const amountClass = isExpense ? 'text-on-surface' : 'text-secondary';
+            const badgeClass = isExpense ? 'bg-primary-container/30 border-primary/20 text-on-primary-container' : 'bg-secondary-container/20 border-secondary/20 text-secondary-fixed-dim';
+            const statusIcon = tx.status === 'Cleared' ? 'check_circle' : 'pending';
+            const statusColor = tx.status === 'Cleared' ? 'text-secondary' : 'text-outline';
+
+            const rowHTML = `
+            <tr class="hover:bg-white/[0.02] transition-colors group cursor-pointer" onclick="deleteTxPrompt('${tx.id}')">
+                <td class="py-4 px-md text-on-surface-variant">
+                    <div>${formatDate(tx.date)}</div>
+                    <div class="text-xs opacity-60 mt-0.5">${formatTime(tx.date)}</div>
+                </td>
+                <td class="py-4 px-md">
+                    <div class="font-medium text-on-surface">${escapeHtml(tx.merchant)}</div>
+                    <div class="text-sm text-on-surface-variant/70 mt-0.5">${escapeHtml(tx.details || 'No notes')}</div>
+                </td>
+                <td class="py-4 px-md">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border ${badgeClass} font-label-sm text-[12px]">
+                        <span class="material-symbols-outlined text-[14px]">${tx.categoryIcon || 'receipt'}</span>
+                        ${escapeHtml(tx.category)}
+                    </span>
+                </td>
+                <td class="py-4 px-md text-right font-headline-md text-[18px] ${amountClass}">
+                    ${amountFormatted}
+                </td>
+                <td class="py-4 px-md text-center">
+                    <span class="material-symbols-outlined ${statusColor} text-[20px]" title="${tx.status}">${statusIcon}</span>
+                </td>
+                <td class="py-4 px-4 text-right">
+                    <button class="text-on-surface-variant hover:text-on-surface opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span class="material-symbols-outlined">delete</span>
+                    </button>
+                </td>
+            </tr>
+            `;
+            tbody.insertAdjacentHTML('beforeend', rowHTML);
+        });
+    }
+
+    // Render Pagination Info
+    const infoEl = document.getElementById('pagination-info');
+    if (totalEntries === 0) {
+        infoEl.textContent = 'Showing 0 entries';
+    } else {
+        infoEl.textContent = `Showing ${startIdx + 1} to ${endIdx} of ${totalEntries} entries`;
+    }
+
+    // Render Pagination Controls
+    const controls = document.getElementById('pagination-controls');
+    controls.innerHTML = '';
+
+    // Prev Button
+    const prevBtn = document.createElement('button');
+    prevBtn.className = "w-8 h-8 rounded-lg flex items-center justify-center border border-white/10 text-on-surface-variant hover:bg-surface-bright hover:text-on-surface transition-colors disabled:opacity-50";
+    prevBtn.disabled = currentPage === 1;
+    prevBtn.innerHTML = '<span class="material-symbols-outlined text-[18px]">chevron_left</span>';
+    prevBtn.addEventListener('click', () => {
+        currentPage--;
+        renderPage();
+    });
+    controls.appendChild(prevBtn);
+
+    // Page Numbers
+    for (let i = 1; i <= totalPages; i++) {
+        const pageBtn = document.createElement('button');
+        if (i === currentPage) {
+            pageBtn.className = "w-8 h-8 rounded-lg flex items-center justify-center bg-secondary/20 text-secondary font-label-sm border border-secondary/30";
+        } else {
+            pageBtn.className = "w-8 h-8 rounded-lg flex items-center justify-center border border-white/10 text-on-surface-variant hover:bg-surface-bright hover:text-on-surface transition-colors font-label-sm";
+        }
+        pageBtn.textContent = i;
+        pageBtn.addEventListener('click', () => {
+            currentPage = i;
+            renderPage();
+        });
+        controls.appendChild(pageBtn);
+    }
+
+    // Next Button
+    const nextBtn = document.createElement('button');
+    nextBtn.className = "w-8 h-8 rounded-lg flex items-center justify-center border border-white/10 text-on-surface-variant hover:bg-surface-bright hover:text-on-surface transition-colors disabled:opacity-50";
+    nextBtn.disabled = currentPage === totalPages;
+    nextBtn.innerHTML = '<span class="material-symbols-outlined text-[18px]">chevron_right</span>';
+    nextBtn.addEventListener('click', () => {
+        currentPage++;
+        renderPage();
+    });
+    controls.appendChild(nextBtn);
+
+    // Update Sidebar summaries
+    renderSidebarSummary();
+}
+
+function deleteTxPrompt(id) {
+    if (confirm("Delete this transaction?")) {
+        const db = window.FinGlassDB.getData();
+        const txIndex = db.transactions.findIndex(t => t.id === id);
+        if (txIndex !== -1) {
+            const tx = db.transactions[txIndex];
+            db.balance -= tx.amount; // reverse balance influence
+            
+            // Reverse budget influence
+            if (tx.amount < 0 && db.budgets[tx.category]) {
+                db.budgets[tx.category].spent = Math.max(0, db.budgets[tx.category].spent - Math.abs(tx.amount));
+            }
+            
+            db.transactions.splice(txIndex, 1);
+            localStorage.setItem('finglass_data', JSON.stringify(db));
+            renderPage();
+        }
+    }
+}
+window.deleteTxPrompt = deleteTxPrompt;
+
+function renderSidebarSummary() {
+    const transactions = window.FinGlassDB.getTransactions();
+    
+    // Inflow / Outflow calculation
+    let inflow = 0;
+    let outflow = 0;
+    const catSpent = {};
+
+    transactions.forEach(t => {
+        if (t.amount > 0) {
+            inflow += t.amount;
+        } else {
+            const absAmt = Math.abs(t.amount);
+            outflow += absAmt;
+            catSpent[t.category] = (catSpent[t.category] || 0) + absAmt;
+        }
+    });
+
+    document.getElementById('summary-inflow').textContent = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(inflow);
+    document.getElementById('summary-outflow').textContent = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(outflow);
+
+    // Progress percentage bars
+    const total = inflow + outflow || 1;
+    const inflowPercent = Math.min(100, Math.round((inflow / total) * 100));
+    const outflowPercent = Math.min(100, Math.round((outflow / total) * 100));
+    
+    document.getElementById('summary-inflow-progress').style.width = inflowPercent + '%';
+    document.getElementById('summary-outflow-progress').style.width = outflowPercent + '%';
+
+    // Top Categories
+    const sortedCats = Object.entries(catSpent).sort((a, b) => b[1] - a[1]).slice(0, 3);
+    const catContainer = document.getElementById('summary-categories');
+    catContainer.innerHTML = '';
+
+    const colors = ['bg-primary', 'bg-tertiary', 'bg-outline'];
+    if (sortedCats.length === 0) {
+        catContainer.innerHTML = '<p class="text-on-surface-variant text-sm">No expenses logged yet</p>';
+    } else {
+        sortedCats.forEach(([cat, val], idx) => {
+            const color = colors[idx] || 'bg-outline';
+            const catHTML = `
+            <div class="flex items-center justify-between text-sm">
+                <div class="flex items-center gap-2">
+                    <div class="w-2.5 h-2.5 rounded-full ${color}"></div>
+                    <span class="text-on-surface">${escapeHtml(cat)}</span>
+                </div>
+                <span class="font-semibold text-on-surface-variant">${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(val)}</span>
+            </div>
+            `;
+            catContainer.insertAdjacentHTML('beforeend', catHTML);
+        });
+    }
+}
+
+function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+}
+
+function formatDate(dateStr) {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+function formatTime(dateStr) {
+    const d = new Date(dateStr);
+    return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
+
+// Attach event listeners for real-time searching and filtering
+document.addEventListener('DOMContentLoaded', () => {
+    renderPage();
+    document.getElementById('search-input').addEventListener('input', () => {
+        currentPage = 1;
+        renderPage();
+    });
+    document.getElementById('category-filter').addEventListener('change', () => {
+        currentPage = 1;
+        renderPage();
+    });
+    document.getElementById('sort-filter').addEventListener('change', () => {
+        currentPage = 1;
+        renderPage();
+    });
+});
+</script>
+</body></html>
